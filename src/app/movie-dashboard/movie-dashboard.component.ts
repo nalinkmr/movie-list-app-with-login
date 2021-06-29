@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MovieDashboardService } from './movie-dashboard.service';
 
 declare var $: any;
@@ -17,7 +18,7 @@ export class MovieDashboardComponent implements OnInit {
   public genres :any;
   public title :any;
   public searchKey: any;
-  constructor(private movieDashboardService : MovieDashboardService) { }
+  constructor(private movieDashboardService : MovieDashboardService, private router : Router) { }
 
   ngOnInit(): void {
     this.getMovie();
@@ -61,6 +62,13 @@ export class MovieDashboardComponent implements OnInit {
   // clear the searched item
   clearSearch() {
     this.searchKey = null;
+  }
+
+  // logout
+  public logout() {
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+    this.router.navigate(['/login']);
   }
 
 }
